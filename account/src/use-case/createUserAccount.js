@@ -26,5 +26,23 @@ const accountUser = [
     }
 ];
 
+export function createNewUserWithAdressAndState(name, email, phone, logradouro, numero, complemento ='',
+    bairro, cep, cidade, estado){        
+    const add = {
+        nome: name,
+        email: email,
+        telefone: phone,
+        rua: logradouro,
+        numero: numero,
+        complemento: complemento,
+        bairro: bairro,
+        cep: cep,
+        cidade: cidade,
+        estado: estado
+    }
+accountUser.push(add);
+return accountUser;
+}
+
 export { accountUser }      
 
