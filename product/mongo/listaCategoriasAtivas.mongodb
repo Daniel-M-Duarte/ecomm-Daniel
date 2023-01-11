@@ -1,0 +1,6 @@
+const database = "ecomm-product";
+use(database);
+
+db.categories.find({
+    status: 'ATIVA'
+})
