@@ -1,0 +1,20 @@
+const database = "ecomm-product";
+use(database);
+
+db.products.find({}).forEach(function(product){
+    let categorieDetails = db.categories.findOne({ nome: product.categoria });
+
+    product.categoria_id = categorieDetails._id;
+
+    db.products.updateMany({
+        categoria: categorieDetails.nome
+    }, {
+        $set: {
+            categoria: {
+                idCategoria: categorieDetails._id,
+                nomeCategoria: categorieDetails.nome
+            }
+        }
+    }) 
+
+})
