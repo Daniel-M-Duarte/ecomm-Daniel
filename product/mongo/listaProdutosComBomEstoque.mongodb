@@ -1,0 +1,13 @@
+const database = "ecomm-product";
+use(database);
+
+db.products.find(
+    {
+     qtd_estoque: {
+        $gte: 3
+    }
+    }, 
+    {   
+        produto: 1,
+        qtd_estoque: 1,
+    })
