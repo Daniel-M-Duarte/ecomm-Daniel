@@ -5,7 +5,7 @@ db.users.insertMany([
         {
             nome: "Nasai",            
             email: "nasai@example.com",
-            senha: "Nasai123",
+            senha: "$2y$10$GokKVcQh3IonpO5ThezCservWivqH2eKtXCjJhE4ryMOcYlZSnsFy",
             dataDeCriacao: ISODate(),
         },
         dadosPessoais: 
@@ -29,7 +29,7 @@ db.users.insertMany([
         {
             nome: "Gatol",            
             email: "gatol@example.com",
-            senha: "Gatol123",
+            senha: "$2y$10$iYAolEHUFGLrfNtxpvfiR.j.mvISQyFOpNG/WGc3Ayq5fTTI.MFt2",
             dataDeCriacao: ISODate(),
         },
         dadosPessoais: 
@@ -53,7 +53,7 @@ db.users.insertMany([
         {
             nome: "Xubra",            
             email: "xubra@example.com",
-            senha: "Xubra123",
+            senha: "$2y$10$Mw1qLzXvcdbDdX38LOgf3ehJhUvQU8xpH9nPAdI47lO39AA3kdKtW",
             dataDeCriacao: ISODate(),
         },
         dadosPessoais: 
