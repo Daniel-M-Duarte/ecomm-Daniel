@@ -1,0 +1,9 @@
+const database = "ecomm-product";
+use(database);
+
+db.products.find({
+    $or: [
+        { categoria: 'LIVROS' },
+        { categoria: 'CELULARES' }
+        ]
+})

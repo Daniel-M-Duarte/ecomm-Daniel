@@ -1,0 +1,8 @@
+const database = "ecomm-product";
+use(database);
+
+db.products.updateMany({ "categoria.nomeCategoria" : 'LIVROS' }, {
+    $set: {
+        qtd_estoque: 0
+    }
+});
