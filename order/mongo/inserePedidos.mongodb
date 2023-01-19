@@ -34,7 +34,7 @@ db.orders.insertMany([
         pedido: [
             {                   
                 produto: productFromDataBase_01.produto,
-                quatidade: 1,
+                quatidade: 2,
                 precoSemDesconto: productFromDataBase_01.precoUnitario,
                 valorDesconto: NumberDecimal("60"),
                 totalPagamento: NumberDecimal("1829")              
