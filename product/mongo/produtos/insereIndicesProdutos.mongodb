@@ -1,8 +1,0 @@
-const database = "ecomm-product";
-use(database);
-
-db.products.createIndex({ produto: 1 })
-
-db.products.createIndex({ slug: 1}, { unique: true});
-
-db.products.getIndexes();
