@@ -1,0 +1,76 @@
+use('ecomm-account')
+db.users.insertMany([
+    {
+        dadosCadastro: 
+        {
+            nome: "Nasai",            
+            email: "nasai@example.com",
+            senha: "$2y$10$GokKVcQh3IonpO5ThezCservWivqH2eKtXCjJhE4ryMOcYlZSnsFy",
+            dataDeCriacao: ISODate(),
+        },
+        dadosPessoais: 
+        {
+            cpf: "174.202.780-67",
+            telefone: "989997885"
+        },
+        endereco: 
+        {
+            rua: "Rua Gênova",
+            numero: 48,
+            complemento: 'AP 301',
+            cep: '91440-060',
+            cidade: "Porto Alegre",
+            estado: "RS"
+        }
+    },
+
+    {
+        dadosCadastro: 
+        {
+            nome: "Gatol",            
+            email: "gatol@example.com",
+            senha: "$2y$10$iYAolEHUFGLrfNtxpvfiR.j.mvISQyFOpNG/WGc3Ayq5fTTI.MFt2",
+            dataDeCriacao: ISODate(),
+        },
+        dadosPessoais: 
+        {
+            cpf: "174.202.780-67",
+            telefone: "9875523215"
+        },
+        endereco: 
+        {
+            rua: "Rua Rubens Ribeiro",
+            numero: 33,
+            complemento: 'Bloco 15',
+            cep: '37250-970',
+            cidade: "Nepomuceno",
+            estado: "MG"
+        }
+    },
+
+    { 
+        dadosCadastro: 
+        {
+            nome: "Xubra",            
+            email: "xubra@example.com",
+            senha: "$2y$10$Mw1qLzXvcdbDdX38LOgf3ehJhUvQU8xpH9nPAdI47lO39AA3kdKtW",
+            dataDeCriacao: ISODate(),
+        },
+        dadosPessoais: 
+        {
+            cpf: "824.811.260-847",
+            telefone: "8123456788"
+        },
+        endereco: 
+        {
+            rua: "Avenida Atlântica",
+            numero: 603,
+            complemento: 'Beco 12',
+            cep: '28735-971',
+            cidade: "Quissamã",
+            estado: "RJ"
+        }
+    }
+])
+
+

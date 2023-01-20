@@ -1,0 +1,56 @@
+use("ecomm-order");
+
+db.orders.aggregate([
+    {
+        $match: {          
+            nomeCliente: "Nasai"
+        }
+    }, {
+        $unwind: "$pedido"
+    },
+    
+     {
+        $project: {
+            _id: 1,
+            nomeCliente: 1,
+            idCliente: 1,
+            totalDeItensDoPedidos: {
+                $sum: "$pedido.quatidade"
+            },
+            totalSemDesconto: { 
+                $multiply: [ "$pedido.quatidade", "$pedido.precoSemDesconto"] 
+                },
+            totalComDesconto: {
+                $multiply: [ "$pedido.quatidade", "$pedido.totalPagamento"]
+            }, 
+            valorDesconto: {
+                $multiply: [ "$pedido.quatidade", "$pedido.valorDesconto"]
+            }    
+
+        }
+    }, 
+    {
+        $group: {
+            _id: "$_id",
+            nome: { "$first": "$nomeCliente"},
+            idCliente: { "$first": "$idCliente"},
+            quantidadeDeItens: {
+                $sum: "$totalDeItensDoPedidos"
+            },
+            precoSemDesconto: {
+                $sum: "$totalSemDesconto"
+            },
+            totalApagar: {
+                $sum: "$totalComDesconto"
+            },
+            descontoGerado: {
+                $sum: "$valorDesconto"
+            }
+        }
+    },
+    {
+        $merge: "estatiscaPedido"
+    }
+
+])
+

@@ -1,0 +1,76 @@
+use('ecomm-account');
+var userFromDataBase01 = getUserFromDataBase("Nasai");
+var userFromDataBase02 = getUserFromDataBase("Gatol");
+
+function getUserFromDataBase(user){
+    return db.users.findOne({ "dadosCadastro.nome" : user })
+}
+
+
+use('ecomm-product');
+var productFromDataBase_01 = getProductFromDataBase("Monitor Dell 27");
+var productFromDataBase_02 = getProductFromDataBase("iPhone 13 Pro");
+var productFromDataBase_03 = getProductFromDataBase("Central multimidia");
+
+function getProductFromDataBase(product){
+    return db.products.findOne({ produto: product });
+}
+
+use('ecomm-order');
+db.orders.insertMany([
+    {   
+        orderDate: ISODate(),
+        nomeCliente: userFromDataBase01.dadosCadastro.nome,
+        idCliente: userFromDataBase01._id, 
+        enderecoDeEntrega: 
+        {
+            rua: userFromDataBase01.endereco.rua,
+            numero: userFromDataBase01.endereco.numero,
+            complemento: userFromDataBase01.endereco.complemento,
+            cep: userFromDataBase01.endereco.cep,
+            cidade: userFromDataBase01.endereco.cidade,
+            estado: userFromDataBase01.endereco.estado
+        },
+        pedido: [
+            {                   
+                produto: productFromDataBase_01.produto,
+                quatidade: 2,
+                precoSemDesconto: productFromDataBase_01.precoUnitario,
+                valorDesconto: NumberDecimal("60"),
+                totalPagamento: NumberDecimal("1829")              
+            },
+            {
+                produto: productFromDataBase_02.produto,
+                quatidade: 1,
+                precoSemDesconto: productFromDataBase_02.precoUnitario,  
+                valorDesconto: NumberDecimal("200"),
+                totalPagamento: NumberDecimal("8976")                             
+                
+            }
+        ]        
+    },
+ {   
+        orderDate: ISODate(),
+        nomeCliente: userFromDataBase02.dadosCadastro.nome,
+        idCliente: userFromDataBase02._id, 
+        enderecoDeEntrega: 
+        {
+            rua: userFromDataBase02.endereco.rua,
+            numero: userFromDataBase02.endereco.numero,
+            complemento: userFromDataBase02.endereco.complemento,
+            cep: userFromDataBase02.endereco.cep,
+            cidade: userFromDataBase02.endereco.cidade,
+            estado: userFromDataBase02.endereco.estado
+        },
+        pedido: [
+            {                   
+                produto: productFromDataBase_03.produto,
+                quatidade: 1,
+                precoSemDesconto: productFromDataBase_03.precoUnitario,  
+                valorDesconto: NumberDecimal("20"),
+                totalPagamento: NumberDecimal("691.18")             
+            }
+        ]        
+    },
+
+])
