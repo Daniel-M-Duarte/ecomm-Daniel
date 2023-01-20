@@ -11,8 +11,9 @@ db.orders.aggregate([
     
      {
         $project: {
-            _id: 0,
+            _id: 1,
             nomeCliente: 1,
+            idCliente: 1,
             totalDeItensDoPedidos: {
                 $sum: "$pedido.quatidade"
             },
@@ -30,7 +31,9 @@ db.orders.aggregate([
     }, 
     {
         $group: {
-            _id: "$nomeCliente",
+            _id: "$_id",
+            nome: { "$first": "$nomeCliente"},
+            idCliente: { "$first": "$idCliente"},
             quantidadeDeItens: {
                 $sum: "$totalDeItensDoPedidos"
             },
@@ -40,7 +43,7 @@ db.orders.aggregate([
             totalApagar: {
                 $sum: "$totalComDesconto"
             },
-            economiaCliente: {
+            descontoGerado: {
                 $sum: "$valorDesconto"
             }
         }
