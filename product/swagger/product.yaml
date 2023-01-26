@@ -78,6 +78,71 @@ paths:
           content:
             application/json:
               example: "Not found"
+  /api/admin/categories/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type:
+          string
+      required: true
+    put:
+      tags:  
+      - atualização de dados (adm)
+      summary: Admin atualiza os dados de categoria pelo id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Categorias"
+      responses:
+        202:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Categorias"
+        404:
+          description: Categoria não encontrada
+          content:
+            application/json:
+              example: "Not found" 
+      security:
+        - auth: []              
+    delete:
+      tags: 
+        - deletar uma categoria
+      summary: admin apaga uma categoria através do id
+      responses:
+        204:
+          description: Sucesso
+          content:
+            application/json:
+              example: "Categoria removida com sucesso"
+        404:
+          description: Categoria não encontrada
+          content:
+            application/json:
+              example: "Not found" 
+      security:
+        - auth: []               
+    patch:
+      tags:
+      - alterando status categoria
+      summary: admin altera status de uma categoria via id
+      responses:
+        201:
+          description: Nova categoria criada com sucesso!
+          content:
+            application/json:
+              example: "Categoria atualiza"
+        404:
+          description: Categoria não encontrada
+          content:
+            application/json:
+              example: "Not found"
+      security:
+        - auth: []              
 components:
   schemas:
     Categorias:
