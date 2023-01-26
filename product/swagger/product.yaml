@@ -54,6 +54,30 @@ paths:
                 $ref: "#/components/schemas/Categorias"
       security:
         - auth: []
+  /api/categories/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type:
+          string
+      required: true
+    get:
+      tags: 
+        - Buscando uma categoria pelo id
+      summary: Retorna detalhes de uma categoria do respectivo id
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Categorias"
+        404:
+          description: Categoria não encontrada
+          content:
+            application/json:
+              example: "Not found"
 components:
   schemas:
     Categorias:
