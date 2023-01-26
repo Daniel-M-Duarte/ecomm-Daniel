@@ -1,0 +1,50 @@
+openapi: 3.0.3
+info:
+  title: API de consulta de produtos
+  description: API que vai listar todas as categorias de produtos que do nosso sistemas
+  version: 0.0.1
+  termsOfService: https://mockapi.io
+  contact:
+    name: Daniel Maciel Duarte
+    email: daniel.duarte@pagonxt.com
+  license:
+    name: "Licença: GPLv3"
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+servers: 
+- url: https://api-test.com/
+  description: API de Categorias
+paths:
+  /api/categories:
+    get:
+      tags:
+       - lista de categorias
+      summary: Recupera todas as categorias cadastradas
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Categoriaslista"
+        501:
+          description: Mensagem de erro quando não há nenhuma categoria implementada
+          content:
+            application/json:
+              example: 
+                Sorry! Not implemented
+components:
+  schemas:
+    Categorias:
+      type: object
+      properties: 
+        id:
+          type: integer
+        nome:
+          type: string
+        status: 
+          type: string
+      $ref: "#/components/schemas/Categorias"   
+    Categoriaslista:
+      type: array
+      items: 
+        $ref: "#/components/schemas/Categorias"
