@@ -52,6 +52,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Categorias"
+      security:
+        - auth: []
 components:
   schemas:
     Categorias:
@@ -68,3 +70,8 @@ components:
       type: array
       items: 
         $ref: "#/components/schemas/Categorias"
+  securitySchemes:
+    auth:   
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
