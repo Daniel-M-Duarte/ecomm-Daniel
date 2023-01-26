@@ -32,6 +32,26 @@ paths:
             application/json:
               example: 
                 Sorry! Not implemented
+  /api/admin/categories:
+    post:
+      tags: 
+      - inserindo uma nova categoria
+      summary: Nova categoria inserida pelo admin 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+      responses:
+        201: 
+          description: Nova categoria criada com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Categorias"
 components:
   schemas:
     Categorias:
