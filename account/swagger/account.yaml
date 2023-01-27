@@ -1,0 +1,176 @@
+openapi: 3.0.3
+info:
+  title: API de consulta de usuarios
+  description: API responsável pela manipulação de dados do usuário
+  version: 1.0.0
+  termsOfService: https://mockapi.io
+  contact:
+    name: Daniel Maciel Duarte
+    email: daniel.duarte@pagonxt.com
+  license:
+    name: "Licença: GPLv3"
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+servers: 
+- url: https://api-test.com/
+  description: API de Categorias
+tags:
+  - name: usuários
+paths:
+  /api/accounts:
+    get:
+      tags:
+       - usuários
+      summary: Lista todos os usuários cadastrados
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsuarioLista"
+  /api/accounts/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type:
+          string
+      required: true
+    get:
+      tags: 
+        - usuários
+      summary: Retorna detalhes de um usuário atarvés  do respectivo id
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+        404:
+          description: Categoria não encontrada
+          content:
+            application/json:
+              example: "Not found"                
+  /api/admin/accounts/:              
+    post:
+      tags: 
+      - usuários
+      summary: Admin insere novo usuario  
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NovoUsuario"
+      responses:
+        201: 
+          description: Nova categoria criada com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+      security:
+        - auth: []
+  /api/admin/accounts/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type:
+          string
+      required: true
+    put:
+      tags:  
+      - usuários
+      summary: Admin atualiza os dados do usuário informando o id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NovoUsuario"
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+        404:
+          description: Categoria não encontrada
+          content:
+            application/json:
+              example: "Not found" 
+      security:
+        - auth: []              
+    delete:
+      tags: 
+        - usuários
+      summary: admin deleta um usuario do sistema informando o id
+      responses:
+        404:
+          description: Categoria não encontrada
+          content:
+            application/json:
+              example: "Not found" 
+      security:
+        - auth: []             
+components:
+  schemas:
+    Usuario:
+      type: object
+      properties: 
+        id:
+          type: string
+        nome:
+          type: string
+        email:
+          type: string
+        telefone:
+          type: string
+        rua:
+          type: string
+        numero:
+          type: integer
+        complemento:
+          type: string
+        cep:
+          type: string
+        cidade:
+          type: string
+        estado:
+          type: string
+    NovoUsuario:
+      type: object
+      properties: 
+        nome:
+          type: string
+        email:
+          type: string
+        senha: 
+          type: string
+        cpf:
+          type: string
+        telefone:
+          type: string
+        rua:
+          type: string
+        numero:
+          type: integer
+        complemento:
+          type: string
+        cep:
+          type: string
+        cidade:
+          type: string
+        estado:
+          type: string          
+      $ref: "#/components/schemas/NovoUsuario"   
+    UsuarioLista:
+      type: array
+      items: 
+        $ref: "#/components/schemas/Usuario"
+  securitySchemes:
+    auth:   
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
