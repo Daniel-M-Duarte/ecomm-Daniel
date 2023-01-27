@@ -1,8 +1,8 @@
 openapi: 3.0.3
 info:
   title: API de consulta de produtos
-  description: API que vai listar todas as categorias de produtos que do nosso sistemas
-  version: 0.0.1
+  description: API que vai listar todas as categorias e ou produtos que estão cadastrados em nosso sistema
+  version: 1.0.0
   termsOfService: https://mockapi.io
   contact:
     name: Daniel Maciel Duarte
@@ -12,12 +12,15 @@ info:
     url: https://www.gnu.org/licenses/gpl-3.0.html
 servers: 
 - url: https://api-test.com/
-  description: API de Categorias
+  description: API de Categorias/Produtos
+tags: 
+  - name: categorias
+  - name: produtos
 paths:
   /api/categories:
     get:
       tags:
-       - lista de categorias
+       - categorias
       summary: Recupera todas as categorias cadastradas
       responses:
         200:
@@ -29,7 +32,7 @@ paths:
   /api/admin/categories:
     post:
       tags: 
-      - inserindo uma nova categoria
+      - categorias
       summary: Nova categoria inserida pelo admin 
       requestBody:
         content:
@@ -58,7 +61,7 @@ paths:
       required: true
     get:
       tags: 
-        - Buscando uma categoria pelo id
+        - categorias
       summary: Retorna detalhes de uma categoria do respectivo id
       responses:
         200:
@@ -82,7 +85,7 @@ paths:
       required: true
     put:
       tags:  
-      - atualização de dados (adm)
+      - categorias
       summary: Admin atualiza os dados de categoria pelo id
       requestBody:
         content:
@@ -105,7 +108,7 @@ paths:
         - auth: []              
     delete:
       tags: 
-        - deletar uma categoria
+        - categorias
       summary: admin apaga uma categoria através do id
       responses:
         204:
@@ -122,7 +125,7 @@ paths:
         - auth: []               
     patch:
       tags:
-      - alterando status categoria
+        - categorias
       summary: admin altera status de uma categoria via id
       responses:
         201:
@@ -137,6 +140,105 @@ paths:
               example: "Not found"
       security:
         - auth: []              
+  /api/products:
+    get:
+      tags: 
+        - produtos
+      description: Página de produtos
+      summary: Lista todos os produtos cadastrados do sistema
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListaDeProdutos"
+  /api/products/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type:
+          string
+      required: true
+    get: 
+      tags: 
+        - produtos
+      summary: Retorna detalhes um produto através do respectivo id
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Produto"
+        404:
+          description: Produto não encontrado
+          content:
+            application/json:
+              example: "Not found"                
+  /api/admin/products/:
+    post:
+      tags: 
+      - produtos
+      summary: Novo produto inserido pelo admin 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProdutoNovo"  
+      responses:
+        201: 
+          description: Nova categoria criada com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Produto"
+      security:
+        - auth: []
+  /api/admin/products/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type:
+          string
+      required: true
+    put:
+      tags:  
+      - produtos
+      summary: Admin atualiza os dados de categoria pelo id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProdutoNovo"
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Produto"
+        404:
+          description: Categoria não encontrada
+          content:
+            application/json:
+              example: "Not found" 
+      security:
+        - auth: []              
+    delete:
+      tags: 
+        - produtos
+      summary: admin apaga uma categoria através do id
+      responses:
+        400:
+          description: Valor ID invalido
+          content:
+            application/json:
+              example: "Not found" 
+      security:
+        - auth: []                     
 components:
   schemas:
     Categoria:
@@ -153,6 +255,44 @@ components:
       type: array
       items: 
         $ref: "#/components/schemas/Categoria"
+    Produto:
+      type: object
+      properties: 
+        id:
+          type: integer
+        nome:
+          type: string
+        descricao: 
+          type: string
+        slug:
+          type: string
+        preco:
+          type: number
+        qtdEstoque:
+          type: integer
+        idCategoria:
+          type: string
+      $ref: "#/components/schemas/Produto"
+    ProdutoNovo:
+      type: object
+      properties: 
+        nome:
+          type: string
+        descricao: 
+          type: string
+        slug:
+          type: string
+        preco:
+          type: number
+        qtdEstoque:
+          type: integer
+        idCategoria:
+          type: string
+      $ref: "#/components/schemas/ProdutoNovo"      
+    ListaDeProdutos:
+      type: array
+      items: 
+        $ref: "#/components/schemas/Produto"        
   securitySchemes:
     auth:   
       type: http
