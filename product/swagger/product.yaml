@@ -140,6 +140,35 @@ paths:
               example: "Not found"
       security:
         - auth: []              
+  /api/categories/listByCategorie:
+    parameters:
+    - name: ''
+      in: query
+      description: Categoria
+      required: true
+      schema:
+        type: string
+    get:
+      tags: 
+        - categorias
+      summary: Lista os produtos de uma categoria específica  
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListaDeProdutos"                
+        404:
+          description: 'Not found'
+          content:
+            application/json:
+              example: "Nenhum produto encontrado"
+        400:
+          description: "invalid value"
+          content:
+            application/json:
+              example: "Valor invalido"
   /api/products:
     get:
       tags: 
@@ -153,6 +182,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListaDeProdutos"
+        404:
+          description: 'Not found'
+          content:
+            application/json:
+              schema:
+                example: "Nenhum produto encontrado"
   /api/products/{id}:
     parameters:
     - name: id
@@ -238,7 +273,71 @@ paths:
             application/json:
               example: "Not found" 
       security:
-        - auth: []                     
+        - auth: []
+  /api/products/findByPrice:
+    parameters:
+        - name: ''
+          in: query
+          description: Valor minimo
+          required: true
+          schema:
+            type: number
+        - name: ''
+          in: query
+          description: Valor maximo
+          required: true               
+          schema:
+            type: number
+    get:
+      tags: 
+        - produtos
+      summary: Busca um produto através de um range de preço  
+      responses:
+        200:
+          description: 'Sucesso'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListaDeProdutos"
+        404:
+          description: 'Not found'
+          content:
+            application/json:
+              example: "Nenhum produto encontrado"
+        400:
+          description: "invalid value"
+          content:
+            application/json:
+              example: "Valor invalido"
+  /api/products/findByMinOfStock:
+    parameters:
+        - name: ''
+          in: query
+          description: Quantidade minima estoque
+          required: true
+          schema:
+            type: integer
+    get:
+      tags: 
+        - produtos
+      summary: Lista de produtos com um valor minimo de estoque 
+      responses:
+        200:
+          description: 'Sucesso'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListaDeProdutos"
+        404:
+          description: 'Not found'
+          content:
+            application/json:
+              example: "Nenhum produto encontrado"
+        400:
+          description: "invalid value"
+          content:
+            application/json:
+              example: "Valor invalido"               
 components:
   schemas:
     Categoria:
