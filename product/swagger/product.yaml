@@ -26,12 +26,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Categoriaslista"
-        501:
-          description: Mensagem de erro quando não há nenhuma categoria implementada
-          content:
-            application/json:
-              example: 
-                Sorry! Not implemented
   /api/admin/categories:
     post:
       tags: 
@@ -51,7 +45,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Categorias"
+                $ref: "#/components/schemas/Categoria"
       security:
         - auth: []
   /api/categories/{id}:
@@ -72,7 +66,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Categorias"
+                $ref: "#/components/schemas/Categoria"
         404:
           description: Categoria não encontrada
           content:
@@ -94,14 +88,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Categorias"
+              $ref: "#/components/schemas/Categoria"
       responses:
         202:
           description: Sucesso
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Categorias"
+                $ref: "#/components/schemas/Categoria"
         404:
           description: Categoria não encontrada
           content:
@@ -145,7 +139,7 @@ paths:
         - auth: []              
 components:
   schemas:
-    Categorias:
+    Categoria:
       type: object
       properties: 
         id:
@@ -154,11 +148,11 @@ components:
           type: string
         status: 
           type: string
-      $ref: "#/components/schemas/Categorias"   
+      $ref: "#/components/schemas/Categoria"   
     Categoriaslista:
       type: array
       items: 
-        $ref: "#/components/schemas/Categorias"
+        $ref: "#/components/schemas/Categoria"
   securitySchemes:
     auth:   
       type: http
