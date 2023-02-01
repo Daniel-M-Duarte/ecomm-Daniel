@@ -1,0 +1,399 @@
+openapi: 3.0.3
+info:
+  title: API de consulta de produtos
+  description: API que vai listar todas as categorias e ou produtos que estão cadastrados em nosso sistema
+  version: 1.0.0
+  termsOfService: https://mockapi.io
+  contact:
+    name: Daniel Maciel Duarte
+    email: daniel.duarte@pagonxt.com
+  license:
+    name: "Licença: GPLv3"
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+servers: 
+- url: https://api-test.com/
+  description: API de Categorias/Produtos
+tags: 
+  - name: categorias
+  - name: produtos
+paths:
+  /api/categories:
+    get:
+      tags:
+       - categorias
+      summary: Recupera todas as categorias cadastradas
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Categoriaslista"
+  /api/admin/categories:
+    post:
+      tags: 
+      - categorias
+      summary: Nova categoria inserida pelo admin 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+      responses:
+        201: 
+          description: Nova categoria criada com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Categoria"
+      security:
+        - auth: []
+  /api/categories/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type:
+          string
+      required: true
+    get:
+      tags: 
+        - categorias
+      summary: Retorna detalhes de uma categoria do respectivo id
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Categoria"
+        404:
+          description: Categoria não encontrada
+          content:
+            application/json:
+              example: "Not found"
+  /api/admin/categories/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type:
+          string
+      required: true
+    put:
+      tags:  
+      - categorias
+      summary: Admin atualiza os dados de categoria pelo id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Categoria"
+      responses:
+        202:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Categoria"
+        404:
+          description: Categoria não encontrada
+          content:
+            application/json:
+              example: "Not found" 
+      security:
+        - auth: []              
+    delete:
+      tags: 
+        - categorias
+      summary: admin apaga uma categoria através do id
+      responses:
+        204:
+          description: Sucesso
+          content:
+            application/json:
+              example: "Categoria removida com sucesso"
+        404:
+          description: Categoria não encontrada
+          content:
+            application/json:
+              example: "Not found" 
+      security:
+        - auth: []               
+    patch:
+      tags:
+        - categorias
+      summary: admin altera status de uma categoria via id
+      responses:
+        201:
+          description: Nova categoria criada com sucesso!
+          content:
+            application/json:
+              example: "Categoria atualiza"
+        404:
+          description: Categoria não encontrada
+          content:
+            application/json:
+              example: "Not found"
+      security:
+        - auth: []              
+  /api/categories/listByCategorie:
+    parameters:
+    - name: ''
+      in: query
+      description: Categoria
+      required: true
+      schema:
+        type: string
+    get:
+      tags: 
+        - categorias
+      summary: Lista os produtos de uma categoria específica  
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListaDeProdutos"                
+        404:
+          description: 'Not found'
+          content:
+            application/json:
+              example: "Nenhum produto encontrado"
+        400:
+          description: "invalid value"
+          content:
+            application/json:
+              example: "Valor invalido"
+  /api/products:
+    get:
+      tags: 
+        - produtos
+      description: Página de produtos
+      summary: Lista todos os produtos cadastrados do sistema
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListaDeProdutos"
+        404:
+          description: 'Not found'
+          content:
+            application/json:
+              schema:
+                example: "Nenhum produto encontrado"
+  /api/products/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type:
+          string
+      required: true
+    get: 
+      tags: 
+        - produtos
+      summary: Retorna detalhes um produto através do respectivo id
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Produto"
+        404:
+          description: Produto não encontrado
+          content:
+            application/json:
+              example: "Not found"                
+  /api/admin/products/:
+    post:
+      tags: 
+      - produtos
+      summary: Novo produto inserido pelo admin 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProdutoNovo"  
+      responses:
+        201: 
+          description: Nova categoria criada com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Produto"
+      security:
+        - auth: []
+  /api/admin/products/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type:
+          string
+      required: true
+    put:
+      tags:  
+      - produtos
+      summary: Admin atualiza os dados de categoria pelo id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProdutoNovo"
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Produto"
+        404:
+          description: Categoria não encontrada
+          content:
+            application/json:
+              example: "Not found" 
+      security:
+        - auth: []              
+    delete:
+      tags: 
+        - produtos
+      summary: admin apaga uma categoria através do id
+      responses:
+        400:
+          description: Valor ID invalido
+          content:
+            application/json:
+              example: "Not found" 
+      security:
+        - auth: []
+  /api/products/findByPrice:
+    parameters:
+        - name: ''
+          in: query
+          description: Valor minimo
+          required: true
+          schema:
+            type: number
+        - name: ''
+          in: query
+          description: Valor maximo
+          required: true               
+          schema:
+            type: number
+    get:
+      tags: 
+        - produtos
+      summary: Busca um produto através de um range de preço  
+      responses:
+        200:
+          description: 'Sucesso'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListaDeProdutos"
+        404:
+          description: 'Not found'
+          content:
+            application/json:
+              example: "Nenhum produto encontrado"
+        400:
+          description: "invalid value"
+          content:
+            application/json:
+              example: "Valor invalido"
+  /api/products/findByMinOfStock:
+    parameters:
+        - name: ''
+          in: query
+          description: Quantidade minima estoque
+          required: true
+          schema:
+            type: integer
+    get:
+      tags: 
+        - produtos
+      summary: Lista de produtos com um valor minimo de estoque 
+      responses:
+        200:
+          description: 'Sucesso'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListaDeProdutos"
+        404:
+          description: 'Not found'
+          content:
+            application/json:
+              example: "Nenhum produto encontrado"
+        400:
+          description: "invalid value"
+          content:
+            application/json:
+              example: "Valor invalido"               
+components:
+  schemas:
+    Categoria:
+      type: object
+      properties: 
+        id:
+          type: integer
+        nome:
+          type: string
+        status: 
+          type: string
+      $ref: "#/components/schemas/Categoria"   
+    Categoriaslista:
+      type: array
+      items: 
+        $ref: "#/components/schemas/Categoria"
+    Produto:
+      type: object
+      properties: 
+        id:
+          type: integer
+        nome:
+          type: string
+        descricao: 
+          type: string
+        slug:
+          type: string
+        preco:
+          type: number
+        qtdEstoque:
+          type: integer
+        idCategoria:
+          type: string
+      $ref: "#/components/schemas/Produto"
+    ProdutoNovo:
+      type: object
+      properties: 
+        nome:
+          type: string
+        descricao: 
+          type: string
+        slug:
+          type: string
+        preco:
+          type: number
+        qtdEstoque:
+          type: integer
+        idCategoria:
+          type: string
+      $ref: "#/components/schemas/ProdutoNovo"      
+    ListaDeProdutos:
+      type: array
+      items: 
+        $ref: "#/components/schemas/Produto"        
+  securitySchemes:
+    auth:   
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

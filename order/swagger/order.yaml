@@ -1,0 +1,103 @@
+openapi: 3.0.3
+info:
+  title: API de consulta de pedidos
+  description: API responsável pela manipulação dos pedidos
+  version: 1.0.0
+  termsOfService: https://mockapi.io
+  contact:
+    name: Daniel Maciel Duarte
+    email: daniel.duarte@pagonxt.com
+  license:
+    name: "Licença: GPLv3"
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+servers: 
+- url: https://api-test.com/
+  description: API de Categorias
+tags:
+  - name: pedidos
+paths:
+  /api/orders/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type:
+          string
+      required: true
+    get:
+      tags: 
+        - pedidos
+      summary: Retorna detalhes de um pedido atarvés  do respectivo id
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+        404:
+          description: Pedido não encontrado
+          content:
+            application/json:
+              example: "Not found"                
+  /api/admin/accounts/:              
+    post:
+      tags: 
+      - pedidos
+      summary: Admin insere novo pedido  
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Usuario'
+      responses:
+        201: 
+          description: Nova categoria criada com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+      security:
+        - auth: []
+components:
+  schemas:
+    Usuario:
+      type: object
+      properties: 
+        id:
+          type: string
+        rua:
+          type: string
+        numero:
+          type: integer
+        complemento:
+          type: string
+        cep:
+          type: string
+        cidade:
+          type: string
+        estado:
+          type: string
+        produtos:
+          type: array
+          items:
+            $ref: "#/components/schemas/Produto"
+      $ref: "#/components/schemas/Usuario"
+    Produto:
+      type: object
+      properties:
+        idProduto: 
+          type: string
+        quantidade:
+          type: integer
+        desconto:
+          type: number
+        precoSemDesconto:
+          type: number
+      $ref: "#/components/schemas/Produto"    
+
+  securitySchemes:
+    auth:   
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
