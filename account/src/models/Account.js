@@ -39,7 +39,7 @@ const accountSchema = new mongoose.Schema(
                 maxlength: 11
             }    
         },
-        endereco: {
+        "endereco": {
             rua: {
                 type: String,
                 required: true
