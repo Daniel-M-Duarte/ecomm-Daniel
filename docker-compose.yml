@@ -38,14 +38,7 @@ services:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: secret
-
-  finance:
-    build: ./finance 
-    container_name: ecomm-finance
-    ports:
-      - 3010:3010   
-    depends_on:
-      - mysql
+      
 volumes:
   db-mongo-ecomm:
   mysql-ecomm-volume:
