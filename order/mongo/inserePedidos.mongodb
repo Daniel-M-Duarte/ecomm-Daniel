@@ -1,4 +1,5 @@
 use('ecomm-account');
+
 var userFromDataBase01 = getUserFromDataBase("Nasai");
 var userFromDataBase02 = getUserFromDataBase("Gatol");
 
@@ -37,7 +38,7 @@ db.orders.insertMany([
                 quatidade: 2,
                 precoSemDesconto: productFromDataBase_01.precoUnitario,
                 valorDesconto: NumberDecimal("60"),
-                totalPagamento: NumberDecimal("1829")              
+                totalPagamento: NumberDecimal("1829")
             },
             {
                 produto: productFromDataBase_02.produto,

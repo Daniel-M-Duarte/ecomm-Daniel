@@ -3,7 +3,24 @@ services:
   account:
     build: ./account
     container_name: app-account
-
+    ports:
+      - "3002:3002"
   product:
     build: ./product
     container_name: ecomm-product
+    ports:
+      - "3001:3001"    
+  mongo:
+    container_name: mongo-ecomm
+    image: mongo
+    volumes:
+      - db-mongo-ecomm:/data/db
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: secret
+
+volumes:
+  db-mongo-ecomm:
