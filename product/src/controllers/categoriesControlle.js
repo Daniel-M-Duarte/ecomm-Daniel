@@ -41,7 +41,7 @@ class CategoryController{
       const id = req.params.id;      
       categories.findByIdAndDelete(id, (err, categories) =>{
         if(err) return res.status(404).json({message: `${err.message} - ID não localizado`});
-        res.status(400).json({message: "Excluido com sucesso"})
+        res.status(204).json({message: "Excluido com sucesso"})
       })
     }
 
