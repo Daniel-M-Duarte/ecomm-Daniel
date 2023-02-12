@@ -49,7 +49,7 @@ class CategoryController{
       const id = req.params.id;
       categories.findByIdAndUpdate(id, {$set: {'status': 'ATIVA'}}, (err, categories) =>{
         if(err) return res.status(500).json({message: err.message});
-        res.status(201).json({message: 'Categoria atualizada'});
+        res.status(200).json({message: 'Categoria atualizada'});
       })
     }
 
