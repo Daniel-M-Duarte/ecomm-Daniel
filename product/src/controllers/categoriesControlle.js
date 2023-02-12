@@ -33,7 +33,7 @@ class CategoryController{
       const id = req.params.id;
       categories.findByIdAndUpdate(id, {$set: req.body}, (err) =>{
         if(err) return res.status(404).json({message: `${err.message} - ID não localizado`});
-        res.status(202).json({message: "Categoria atualizada com sucesso"});
+        res.status(200).json({message: "Categoria atualizada com sucesso"});
       })
     }
 
