@@ -2,10 +2,12 @@ const database = require('../models')
 
 class PaymentController{
     static async createPayment (req, res){
-        const newPayment = req.body
+        const newPayment = {...req.body }
+        const { id, status } = await database.Payments.create(newPayment)
         try {
-            const newPaymentCreated = await database.Payments.create(newPayment)
-            return res.status(200).json(`PAGAMENTO_ID:${newPaymentCreated.id} STATUS: ${newPaymentCreated.status}`)           
+            return res.status(201)
+              .set('Location', `/admin/payments/${id}`)
+              .json({ id, status })           
         } catch (error) {
             return res.status(500).json(error.message)
         }
