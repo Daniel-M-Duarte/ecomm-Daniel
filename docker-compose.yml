@@ -16,6 +16,14 @@ services:
     depends_on:
       - mongo
 
+  finance:
+    build: ./finance
+    container_name: ecomm-finance
+    ports:
+      - "3003:3003"
+    depends_on:
+      - mysql      
+
   mongo:
     container_name: mongo-ecomm
     image: mongo
