@@ -14,17 +14,17 @@ class PaymentController{
                     {
                         rel: 'SELF',
                         method: 'GET',
-                        href: `http://localhost:3010/admin/payments/${id}`
+                        href: `http://localhost:3003/admin/payments/${id}`
                     },
                     {
                         rel: 'CONFIRMADO',
                         method: 'PATCH',
-                        href: `http://localhost:3010/admin/payments/${id}/confirmacao`
+                        href: `http://localhost:3003/admin/payments/${id}/confirmacao`
                     },
                     {
                         rel: 'CANCELADO',
                         method: 'PATCH',
-                        href: `http://localhost:3010/admin/payments/${id}/cancelamento`
+                        href: `http://localhost:3003/admin/payments/${id}/cancelamento`
                     }
                 ]
             }
