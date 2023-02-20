@@ -1,4 +1,5 @@
 const database = require('../models')
+const paymentStatus = require('../constantes/variaveis')
 
 class PaymentController{
 
@@ -65,15 +66,14 @@ class PaymentController{
 
     static async confirmPayment (req, res){
         const { id } = req.params
-        const confirmStatus = { ...req.body }    
         try {
             const getPayment = await database.Payments.findOne({ where: { id: Number(id)}})
 
-            if(getPayment.status !== 'CRIADO') throw new Error('Valor invalido para status')
+            if(getPayment.status !== paymentStatus.criado) throw new Error('Valor invalido para status')
 
             await database.sequelize.transaction(async (transation) =>{
                 await database.Payments.update(
-                    { status: confirmStatus.status},
+                    { status: paymentStatus.confirmado},
                     { where: { id: Number(id)}}, 
                     { transation})
                 })   
@@ -85,15 +85,14 @@ class PaymentController{
 
     static async cancelPayment (req, res){
         const { id } = req.params
-        const cancelStatus = { ...req.body }    
         try {
             const getPayment = await database.Payments.findOne({ where: { id: Number(id)}})
 
-            if(getPayment.status !== 'CRIADO') throw new Error('Valor invalido para status')
+            if(getPayment.status !== paymentStatus.criado) throw new Error('Valor invalido para status')
 
             await database.sequelize.transaction(async (transation) =>{
                 await database.Payments.update(
-                    { status: cancelStatus.status},
+                    { status: paymentStatus.cancelado},
                     { where: { id: Number(id)}}, 
                     { transation}
                 )
