@@ -71,12 +71,9 @@ class PaymentController{
 
             if(getPayment.status !== paymentStatus.criado) throw new Error('Valor invalido para status')
 
-            await database.sequelize.transaction(async (transation) =>{
                 await database.Payments.update(
                     { status: paymentStatus.confirmado},
-                    { where: { id: Number(id)}}, 
-                    { transation})
-                })   
+                    { where: { id: Number(id)}} )
                 return res.status(200).json({"status": "CONFIRMADO"})            
              } catch (error) {
             return res.status(500).json(error.message)
@@ -90,13 +87,10 @@ class PaymentController{
 
             if(getPayment.status !== paymentStatus.criado) throw new Error('Valor invalido para status')
 
-            await database.sequelize.transaction(async (transation) =>{
                 await database.Payments.update(
                     { status: paymentStatus.cancelado},
                     { where: { id: Number(id)}}, 
-                    { transation}
                 )
-                })   
                 return res.status(200).json({"status": "CANCELADO"})            
              } catch (error) {
             return res.status(500).json(error.message)
