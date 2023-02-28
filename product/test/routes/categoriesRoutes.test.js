@@ -18,7 +18,7 @@ afterEach(() => {
 describe('GET in /api/categories', () => {
   it('Should return a list of categories', async () => {
     await request(app)
-      .get('/api/categories-')
+      .get('/api/categories')
       .set('Accept', 'application/json')
       .expect('content-type', /json/)
       .expect(200);
