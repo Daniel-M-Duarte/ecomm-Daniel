@@ -9,4 +9,3 @@ routes(app)
 app.listen(port, () => console.log(`Escutando na porta ${port}`))
 
 module.exports = app
-module.exports = port
