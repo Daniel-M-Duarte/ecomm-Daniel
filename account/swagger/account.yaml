@@ -16,7 +16,7 @@ servers:
 tags:
   - name: usuários
 paths:
-  /api/accounts:
+  /api/admin/accounts:
     get:
       tags:
        - usuários
@@ -52,7 +52,7 @@ paths:
           content:
             application/json:
               example: "Not found"                
-  /api/admin/accounts/:              
+  /api/admin/accounts:              
     post:
       tags: 
       - usuários

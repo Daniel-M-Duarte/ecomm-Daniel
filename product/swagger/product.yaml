@@ -140,7 +140,7 @@ paths:
               example: "Not found"
       security:
         - auth: []              
-  /api/categories/listByCategorie:
+  /api/products/categories/list-by-categorie:
     parameters:
     - name: ''
       in: query
@@ -212,7 +212,7 @@ paths:
           content:
             application/json:
               example: "Not found"                
-  /api/admin/products/:
+  /api/admin/products:
     post:
       tags: 
       - produtos
@@ -274,7 +274,7 @@ paths:
               example: "Not found" 
       security:
         - auth: []
-  /api/products/findByPrice:
+  /api/products/find-by-price:
     parameters:
         - name: ''
           in: query
@@ -309,7 +309,7 @@ paths:
           content:
             application/json:
               example: "Valor invalido"
-  /api/products/findByMinOfStock:
+  /api/products/find-by-min-of-stock:
     parameters:
         - name: ''
           in: query
