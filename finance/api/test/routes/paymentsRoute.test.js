@@ -1,16 +1,7 @@
+/* eslint linebreak-style: ["error", "unix"] */
 const { describe, it } = require('@jest/globals');
 const request = require('supertest');
 const app = require('../../../index');
-
-let server;
-beforeEach(() => {
-  const port = 3030;
-  server = app.listen(port);
-});
-
-afterEach(() => {
-  server.close();
-});
 
 describe('GET in /admin/payments', () => {
   it('Should returns all payments', async () => {
