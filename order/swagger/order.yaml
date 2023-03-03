@@ -40,7 +40,7 @@ paths:
           content:
             application/json:
               example: "Not found"                
-  /api/admin/accounts/:              
+  /api/admin/orders:              
     post:
       tags: 
       - pedidos
