@@ -1,20 +1,17 @@
+/* eslint-disable no-undef */
+import mongoose from 'mongoose';
 import {
   describe, it, test,
 } from '@jest/globals';
 import request from 'supertest';
-import app from '../../src/app';
+import app from '../../src/app.js';
 
-let server;
-
-// eslint-disable-next-line no-undef
-beforeEach(() => {
-  const port = process.env.PORT || 3011;
-  server = app.listen(port);
+beforeAll(async () => {
+  await mongoose.connect('mongodb://admin:secret@localhost:27017/ecomm-product-test?authSource=admin');
 });
 
-// eslint-disable-next-line no-undef
-afterEach(() => {
-  server.close();
+afterAll(async () => {
+  await mongoose.connection.close();
 });
 
 describe('GET in /api/products', () => {

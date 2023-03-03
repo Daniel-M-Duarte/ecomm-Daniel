@@ -1,18 +1,16 @@
 import {
-  afterEach, beforeEach, describe, it, test,
+  afterAll, beforeAll, describe, it, test,
 } from '@jest/globals';
+import mongoose from 'mongoose';
 import request from 'supertest';
-import app from '../../src/app';
+import app from '../../src/app.js';
 
-let server;
-
-beforeEach(() => {
-  const port = process.env.PORT || 3010;
-  server = app.listen(port);
+beforeAll(async () => {
+  await mongoose.connect('mongodb://admin:secret@localhost:27017/ecomm-product-test?authSource=admin');
 });
 
-afterEach(() => {
-  server.close();
+afterAll(async () => {
+  await mongoose.connection.close();
 });
 
 describe('GET in /api/categories', () => {
@@ -71,7 +69,7 @@ describe('PUT in /api/admin/categories/id', () => {
       .put(`/api/admin/categories/${idNewCategory}`)
       .set('Accept', 'application/json')
       .send({ param })
-      .expect(202);
+      .expect(200);
   });
 });
 
