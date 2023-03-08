@@ -1,6 +1,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable new-cap */
 import users from '../models/Account.js';
+import senhaEcrypt from '../helpers/senhaEncrypt.js'
 
 class AccountController {
   static listarContas = (req, res) => {
@@ -9,6 +10,8 @@ class AccountController {
 
   static inserirConta = (req, res) => {
     const user = new users(req.body);
+    const hashSenha = senhaEcrypt(req.body.dadosCadastro.senha);
+    user.dadosCadastro.senha = hashSenha;
     user.save((err) => {
       if (err) return res.status(500).json({ message: `${err.message} - FALHA AO CADASTRAR` });
       return res.status(201).json(user);
