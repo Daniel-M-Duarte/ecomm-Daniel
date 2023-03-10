@@ -3,27 +3,25 @@ import mongoose from 'mongoose';
 const accountSchema = new mongoose.Schema(
   {
     id: { type: String },
-    dadosCadastro: {
-      nome: {
-        type: String,
-        required: true,
-        match: /^[A-Za-zà-úÀ-Ù\s]*/g,
-      },
-      email: {
-        type: String,
-        required: true,
-        match: /^[a-z0-9-_.]+@[a-z0-9-_]+\.[a-z]+\.?([a-z]+)$/g,
+    nome: {
+      type: String,
+      required: true,
+      match: /^[A-Za-zà-úÀ-Ù\s]*/g,
+    },
+    email: {
+      type: String,
+      required: true,
+      match: /^[a-z0-9-_.]+@[a-z0-9-_]+\.[a-z]+\.?([a-z]+)$/g,
 
-      },
-      senha: {
-        type: String,
-        required: true,
-        // match: /^(?=.*\d)(?=.*[a-z])(?=.*[$*&@#])[0-9à-úÀ-Ùa-zA-Z$*&@#]{8,3000}$/,
-      },
-      dataDeCriacao: {
-        type: Date,
-        default: Date.now,
-      },
+    },
+    senha: {
+      type: String,
+      required: true,
+      // match: /^(?=.*\d)(?=.*[a-z])(?=.*[$*&@#])[0-9à-úÀ-Ùa-zA-Z$*&@#]{8,30}$/,
+    },
+    dataDeCriacao: {
+      type: Date,
+      default: Date.now,
     },
     dadosPessoais: {
       cpf: {

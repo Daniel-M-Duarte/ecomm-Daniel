@@ -1,3 +1,4 @@
+/* eslint linebreak-style: ["error", "unix"] */
 import bcryptjs from 'bcryptjs';
 
 function senhaEcrypt(senha) {
@@ -7,4 +8,3 @@ function senhaEcrypt(senha) {
 }
 
 export default senhaEcrypt;
-
