@@ -1,2 +1,0 @@
-import { addAdressOfUsers } from "../src/use-case/addAdressUserAccount.js";
-console.log(addAdressOfUsers('josuelima@email.com', 'Rua Ari Barroso', '48', 'ap 12', 'Sarandi', '91130-120', 'Porto Alegre', 'RS'));
