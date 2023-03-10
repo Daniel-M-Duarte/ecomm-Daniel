@@ -4,8 +4,10 @@
 /* eslint-disable linebreak-style */
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
+import BearerStrategy from 'passport-http-bearer';
 import users from '../models/Account.js';
 import bcrytjs from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 function verifyAccount(account) {
   if (!account) {
@@ -37,3 +39,16 @@ passport.use(
   }),
 );
 
+passport.use(
+  new BearerStrategy(
+    async (token, done) => {
+      try {
+        const payload = jwt.verify(token, process.env.CHAVE_JWT);
+        const account = await users.findById(payload.id);
+        done(null, account, { token });
+      } catch (error) {
+        done(error);
+      }
+    },
+  ),
+);
