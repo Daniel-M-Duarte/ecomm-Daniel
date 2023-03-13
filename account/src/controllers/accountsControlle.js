@@ -4,7 +4,10 @@ import users from '../models/Account.js';
 
 class AccountController {
   static listarContas = (req, res) => {
-    users.find((err, users) => res.status(200).json(users));
+    users.find((err, users) => {
+      if (err) return res.status(500).json({ error: err.message });
+      return res.status(200).json(users);
+    });
   };
 
   static inserirConta = (req, res) => {
@@ -19,7 +22,7 @@ class AccountController {
     const { id } = req.params;
     // eslint-disable-next-line no-shadow
     users.findById(id, (err, users) => {
-      if (err) return res.status(404).json({error: err.message});
+      if (err) return res.status(404).json({ error: err.message });
       return res.status(200).json(users);
     });
   };
