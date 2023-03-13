@@ -9,6 +9,6 @@ router
   .get('/api/accounts/:id', AccountController.buscarContabyId)
   .post('/api/admin/accounts', AccountController.inserirConta)
   .delete('/api/admin/accounts/:id', AccountController.deletarConta)
-  .put('/api/admin/accounts/:id', AccountController.atualizatConta);
+  .put('/api/admin/accounts/:id', AccountController.atualizaConta);
 
 export default router;
