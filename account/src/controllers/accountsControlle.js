@@ -19,7 +19,7 @@ class AccountController {
     const { id } = req.params;
     // eslint-disable-next-line no-shadow
     users.findById(id, (err, users) => {
-      if (err) return res.status(404).send('ID not found');
+      if (err) return res.status(404).json({error: err.message});
       return res.status(200).json(users);
     });
   };
