@@ -6,8 +6,8 @@ import app from '../app.js';
 import categories from './categoriesRoutes.js';
 import products from './productsRoutes.js';
 
-const routes = (app) => {
-  app.use(
+const routes = (application) => {
+  application.use(
     express.json(),
     categories,
     products,
