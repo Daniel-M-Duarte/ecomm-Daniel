@@ -17,7 +17,6 @@ class AccountController {
 
   static inserirConta = (req, res) => {
     const user = new User(req.body);
-    // const hashSenha = senhaEcrypt(req.body.dadosCadastro.senha);
     const hashSenha = senhaEcrypt(req.body.senha);
     user.senha = hashSenha;
     user.save((err) => {
