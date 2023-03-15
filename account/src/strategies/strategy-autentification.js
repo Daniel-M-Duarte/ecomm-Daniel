@@ -1,13 +1,9 @@
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/order */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable linebreak-style */
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
 import BearerStrategy from 'passport-http-bearer';
-import User from '../models/Account.js';
 import bcrytjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import User from '../models/Account.js';
 
 function verifyAccount(account) {
   if (!account) {
