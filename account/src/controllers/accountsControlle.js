@@ -1,5 +1,3 @@
-/* eslint-disable no-shadow */
-/* eslint-disable new-cap */
 import User from '../models/Account.js';
 import senhaEcrypt from '../helpers/senhaEncrypt.js';
 import createJWT from '../strategies/createToken.js';
@@ -12,7 +10,10 @@ class AccountController {
   };
 
   static listarContas = (req, res) => {
-    User.find((err, User) => res.status(200).json(User));
+    User.find((err, users) => {
+      if (err) return res.status(500).json({ error: err.message });
+      return res.status(200).json(users);
+    });
   };
 
   static inserirConta = (req, res) => {
@@ -27,10 +28,9 @@ class AccountController {
 
   static buscarContabyId = (req, res) => {
     const { id } = req.params;
-    // eslint-disable-next-line no-shadow
-    User.findById(id, (err, User) => {
+    User.findById(id, (err, user) => {
       if (err) return res.status(404).send('ID not found');
-      return res.status(200).json(User);
+      return res.status(200).json(user);
     });
   };
 
