@@ -5,7 +5,7 @@
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
 import BearerStrategy from 'passport-http-bearer';
-import users from '../models/Account.js';
+import User from '../models/Account.js';
 import bcrytjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
@@ -29,7 +29,7 @@ passport.use(
     session: false,
   }, async (email, senha, done) => {
     try {
-      const account = await users.findOne({ email });
+      const account = await User.findOne({ email });
       verifyAccount(account);
       await verifyPassword(senha, account.senha);
       done(null, account);
@@ -44,7 +44,7 @@ passport.use(
     async (token, done) => {
       try {
         const payload = jwt.verify(token, process.env.CHAVE_JWT);
-        const account = await users.findById(payload.id);
+        const account = await User.findById(payload.id);
         done(null, account, { token });
       } catch (error) {
         done(error);
