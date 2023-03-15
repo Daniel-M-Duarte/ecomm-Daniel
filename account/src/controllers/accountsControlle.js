@@ -42,7 +42,7 @@ class AccountController {
     });
   };
 
-  static atualizatConta = (req, res) => {
+  static atualizaConta = (req, res) => {
     const { id } = req.params;
     User.findByIdAndUpdate(id, { $set: req.body }, (err) => {
       if (err) return res.status(404).send('ID not found');
