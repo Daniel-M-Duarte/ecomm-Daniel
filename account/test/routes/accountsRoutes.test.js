@@ -4,7 +4,7 @@ import {
 } from '@jest/globals';
 import mongoose from 'mongoose';
 import request from 'supertest';
-import app from '../../src/app';
+import app from '../../src/app.js';
 
 beforeAll(async () => {
   await mongoose.connect('mongodb://admin:secret@localhost:27017/ecomm-account-test?authSource=admin');
