@@ -18,7 +18,7 @@ const accountSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    dataDeCriacao: {
+    dataCriacao: {
       type: Date,
       default: Date.now,
     },
