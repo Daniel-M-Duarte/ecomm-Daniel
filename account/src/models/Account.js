@@ -17,7 +17,6 @@ const accountSchema = new mongoose.Schema(
     senha: {
       type: String,
       required: true,
-      // match: /^(?=.*\d)(?=.*[a-z])(?=.*[$*&@#])[0-9à-úÀ-Ùa-zA-Z$*&@#]{8,30}$/,
     },
     dataDeCriacao: {
       type: Date,
