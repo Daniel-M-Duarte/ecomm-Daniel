@@ -4,8 +4,7 @@ import bcryptjs from 'bcryptjs';
 
 function senhaEcrypt(senha) {
   const salt = bcryptjs.genSaltSync();
-  const senhaHasheada = bcryptjs.hashSync(senha, salt);
-  return senhaHasheada;
+  return bcryptjs.hashSync(senha, salt);
 }
 
 export default senhaEcrypt;
