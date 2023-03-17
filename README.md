@@ -56,3 +56,23 @@ _**XII. Processos administrativos**_ :x:
 ### Rode tarefas de administração/gestão em processos pontuais.
 Não foi aplicado.
 ___
+
+# Microservices Patterns
+
+## A aplicação Ecommerce segue alguns padrões de microserviços como: 
+
+_**Serviços de domínio**_ 
+
+Todos os serviços foram desenvolvidos seguindo o modelo API RESTfull, além disso os serviços de Products, Accounts and Finance possuem persistência de dados.
+___
+_**Serviços de negócio**_ 
+
+Existem interações entre serviços a fim de que ela habilite algumas mudanças de estado.
+___
+_**Single database vs Bancos diferentes**_ 
+
+Cada serviço possui seu próprio banco de dados, facilitando assim a escalabilidade da aplicação.
+___
+_**Eventos  assíncronos**_ 
+
+Algumas requisições possuem eventos assíncronos.
