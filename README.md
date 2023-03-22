@@ -16,7 +16,7 @@ _**II. Dependências**_ :white_check_mark:
 As dependências são gerenciadas através do _NPM_ que utiliza uma ferramenta de isolamento entre elas, além disso o arquivo "package-lock.json" armazena as versões das bibliotecas que foram utilizadas no projeto.
 ___
 _**III.  Configurações**_ :white_check_mark:
- ### Trate serviços de apoio como recursos ligados
+ ### Armazene as configurações no ambiente
 A fim de não comprometer nenhuma credencial o projeto armazena as variaveis de ambiente na biblioteca .env a qual não é compartilhada no Git.
 ___
 
@@ -73,6 +73,3 @@ _**Single database vs Bancos diferentes**_
 
 Cada serviço possui seu próprio banco de dados, facilitando assim a escalabilidade da aplicação.
 ___
-_**Eventos  assíncronos**_ 
-
-Algumas requisições possuem eventos assíncronos.
