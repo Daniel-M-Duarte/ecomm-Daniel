@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "start": "index.js",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose"
+    "start": "node index.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose",
+    "lint": "eslint api"
   },
   "author": "",
   "license": "ISC",

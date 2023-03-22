@@ -48,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 'CRIADO',
     },
   }, {});
-  // eslint-disable-next-line func-names
+  // eslint-disable-next-line func-names, no-unused-vars
   Payments.associate = function (models) {
     // associations can be defined here
   };

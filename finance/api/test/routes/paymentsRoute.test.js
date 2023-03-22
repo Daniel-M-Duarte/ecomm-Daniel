@@ -1,4 +1,3 @@
-/* eslint linebreak-style: ["error", "unix"] */
 const { describe, it } = require('@jest/globals');
 const request = require('supertest');
 const app = require('../../../index');
