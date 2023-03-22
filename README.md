@@ -73,6 +73,3 @@ _**Single database vs Bancos diferentes**_
 
 Cada serviço possui seu próprio banco de dados, facilitando assim a escalabilidade da aplicação.
 ___
-_**Eventos  assíncronos**_ 
-
-Algumas requisições possuem eventos assíncronos.
