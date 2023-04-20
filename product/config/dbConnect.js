@@ -10,3 +10,5 @@ mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${
 const db = mongoose.connection;
 
 export default db;
+
+// Commit 1

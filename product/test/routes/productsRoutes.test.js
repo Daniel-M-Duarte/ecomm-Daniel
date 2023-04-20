@@ -7,7 +7,7 @@ import request from 'supertest';
 import app from '../../src/app.js';
 
 beforeAll(async () => {
-  await mongoose.connect('mongodb://admin:secret@localhost:27017/ecomm-product-test?authSource=admin');
+  await mongoose.connect('mongodb://admin:secret@mongo:27017/ecomm-product-test?authSource=admin');
 });
 
 afterAll(async () => {
